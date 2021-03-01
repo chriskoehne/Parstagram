@@ -33,11 +33,12 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         let query = PFQuery(className: "Posts")
         query.includeKey("author")
+        query.order(byDescending: "createdAt")
         query.limit = 20
         
         query.findObjectsInBackground { (posts, error) in
             if posts != nil {
-                self.posts = posts!.reversed()
+                self.posts = posts!
                 self.tableView.reloadData()
             }
         }
@@ -47,11 +48,12 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         super.viewWillAppear(animated)
         let query = PFQuery(className: "Posts")
         query.includeKey("author")
+        query.order(byDescending: "createdAt")
         query.limit = 20
         
         query.findObjectsInBackground { (posts, error) in
             if posts != nil {
-                self.posts = posts!.reversed()
+                self.posts = posts!
                 self.tableView.reloadData()
             }
         }
